@@ -15,14 +15,6 @@ ActiveRecord::Schema.define(version: 20170408022440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "line_items", force: :cascade do |t|
-    t.integer  "shopping_list_id"
-    t.integer  "product_id"
-    t.integer  "quantity"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
   create_table "list_items", force: :cascade do |t|
     t.integer  "shopping_list_id"
     t.integer  "product_id"
