@@ -12,4 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
+//= require backbone
+//= require semantic.min
+//= require jquery_ui.min
+//= require bootstrap.min
 //= require_tree .
