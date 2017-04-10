@@ -13,9 +13,18 @@
  *= require bootstrap.min
  *= require icon.min
  *= require semantic.min
- *= require jquery_ui.min
- *= require jquery_ui.structure.min
- *= require jquery_ui.theme.min
+ *= require jquery-ui.min
+ *= require jquery-ui.structure.min.css
+ *= require jquery-ui.theme.min
  *= require_tree .
  *= require_self
  */
+
+
+.test {
+  border: 1px solid red;
+}
+
+#shopping_cart, #shopping {
+  height: 100vh;
+}

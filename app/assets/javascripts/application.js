@@ -15,6 +15,16 @@
 //= require underscore
 //= require backbone
 //= require semantic.min
-//= require jquery_ui.min
+//= require jquery-ui.min
 //= require bootstrap.min
 //= require_tree .
+
+$(document).ready(function() {
+
+  $('.ui.button')
+    .on('click', function() {
+      // programmatically activating tab
+      $.tab('change tab', 'tab-name');
+    });
+
+});
