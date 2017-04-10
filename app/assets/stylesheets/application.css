@@ -41,4 +41,7 @@
   height: 400px;
   width: 400px;
   padding: 50px;
+
+div.ui.inverted.segment{
+  background: #0d60a2;
 }

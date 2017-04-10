@@ -16,10 +16,13 @@
 //= require backbone
 //= require semantic.min
 //= require jquery-ui.min
+//= require transition
 //= require bootstrap.min
 //= require_tree .
 
 $(document).ready(function() {
+
+  $('.tabular.menu .item').tab();
 
   $('.ui.button')
     .on('click', function() {
