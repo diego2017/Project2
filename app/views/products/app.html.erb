@@ -2,23 +2,55 @@
 
   <div id="shopping" class="test col-md-8">
     <div class="ui tabular menu">
-      <div class="item" data-tab="tab-category1">Perfumes</div>
+      <div class="item active" data-tab="tab-category1">Perfumes</div>
       <div class="item" data-tab="tab-category2">Books</div>
       <div class="item" data-tab="tab-category3">Toys</div>
       <div class="item" data-tab="tab-category4">Technology</div>
     </div>
-    <div class="ui tab" data-tab="tab-category1">
-      <!-- Tab Content !-->content perfumes
-
+    <div class="ui tab active" data-tab="tab-category1">
+      <% @allPerfumes.each do |product| %>
+        <div class="product_wrap">
+          <img src="<%= product.img_src %>" class="product_img">
+          <!-- <div style="background-image: url("<%= product.img_src %>");" class="product_img"></div> -->
+          <div class="product_min_info">
+            <div class="product_name"><%= product.name %></div>
+            <div class="product_price">$<%= '%.02f' % product.price %></div>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="ui tab" data-tab="tab-category2">
-      <!-- Tab Content !-->content books
+      <% @allBooks.each do |product| %>
+        <div class="product_wrap">
+          <img src="<%= product.img_src %>" class="product_img">
+          <div class="product_min_info">
+            <div class="product_name"><%= product.name %></div>
+            <div class="product_price">$<%= '%.02f' % product.price %></div>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="ui tab" data-tab="tab-category3">
-      <!-- Tab Content !-->content toys
+      <% @allToys.each do |product| %>
+        <div class="product_wrap">
+          <img src="<%= product.img_src %>" class="product_img">
+          <div class="product_min_info">
+            <div class="product_name"><%= product.name %></div>
+            <div class="product_price">$<%= '%.02f' % product.price %></div>
+          </div>
+        </div>
+      <% end %>
     </div>
     <div class="ui tab" data-tab="tab-category4">
-      <!-- Tab Content !-->content technology
+      <% @allTechnology.each do |product| %>
+        <div class="product_wrap">
+          <img src="<%= product.img_src %>" class="product_img">
+          <div class="product_min_info">
+            <div class="product_name"><%= product.name %></div>
+            <div class="product_price">$<%= '%.02f' % product.price %></div>
+          </div>
+        </div>
+      <% end %>
     </div>
 
   </div>   <!-- //shopping column -->
