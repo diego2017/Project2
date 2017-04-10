@@ -28,3 +28,7 @@
 #shopping_cart, #shopping {
   height: 100vh;
 }
+
+div.ui.inverted.segment{
+  background: #0d60a2;
+}
