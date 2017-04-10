@@ -13,11 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
-//= require backbone
 //= require semantic.min
 //= require jquery-ui.min
 //= require transition
 //= require bootstrap.min
+
 //= require_tree .
 
 $(document).ready(function() {

@@ -1,4 +1,9 @@
 class ProductsController < ApplicationController
+
+  def index
+    render json: Product.all
+  end
+  
   def app
     @allPerfumes = Category.find_by(name: "Perfumes").products
     @allBooks = Category.find_by(name: "Books").products

@@ -31,15 +31,22 @@
 
 .product_wrap, .product_price, .product_name {
   display: inline-block;
+  margin: 5px;
+}
+
+.product_name, .product_price {
 }
 
 .product_price {
-  /*float: right;*/
+  float: right;
+
 }
 
 .product_wrap {
-  width: 24%;
-  padding: 50px;
+  width: 23%;
+  max-height: 400px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px #888888;
 }
 
 div.ui.inverted.segment{
@@ -47,5 +54,15 @@ div.ui.inverted.segment{
 }
 
 .product_img {
-  max-width: 100%;
+  max-width: 75%;
+  margin: 5px;
+}
+
+.cart_product_img {
+  width: 100px;
+  height:100px;
+}
+
+.cart_product_info, .cart_product_img {
+  display: inline-block;
 }
