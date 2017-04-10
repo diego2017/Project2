@@ -3,18 +3,23 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(username: params[:input])
+    input = params[:input]
+    if (input.match /.+@.+\..+/i).nil? # Check if this is in an email format
+      user = User.find_by(name: input)
+    else
+      user = User.find_by(email: input)
+    end
+
     if user
-      session[:user_id] = user.id
-      if user.user_type === "Customer"
-        redirect_to search_flight_path
+      if user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect_to root_path
       else
-        redirect_to airplanes_admin_path
+        render :new
       end
     else
       render :new
     end
-
   end
 
   def destroy

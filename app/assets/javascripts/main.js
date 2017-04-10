@@ -69,7 +69,7 @@ $(document).ready(function() {
   var displayShoppingLists = function(shoppingLists) {
     _.each(shoppingLists, function(shoppingList) {
       $shoppingList = $("<div>").addClass("shopping_list");
-      $shoppingListName = $("<div>").addClass("shopping_listName")
+      $shoppingListName = $("<h3>").addClass("shopping_list_name")
                                     .html(shoppingList.name);
       $shoppingList.append($shoppingListName);
 
@@ -98,6 +98,7 @@ $(document).ready(function() {
     });
   };
 
+  // Update quantities
   $(document).on("click", "#updateShoppingCart", function() {
     var listItems = $(".list_item");
     _.each(listItems, function(listItem) {
@@ -110,9 +111,7 @@ $(document).ready(function() {
       $.ajax({
         url: "./list_items/" + listItemID,
         method: "PATCH",
-        data: {
-          format: "json",
-        },
+        data: newQuantity,
         success: displayShoppingLists,
         error: function(e) {
           console.log(e);

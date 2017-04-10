@@ -1,13 +1,4 @@
-<!-- <div>
-  <div id="logo"></div>
-  <div id="shop_name">Gift shopping</div>
-  <div id="user">
-    user stuffs
-    <%# link_to "Log out", logout_path, method: "delete" %>
-    <%# link_to "Log in", login_path%>
-    <%# link_to "Sign up", signup_path%>
-  </div>
-</div> -->
+<% user = User.find_by_id(session[:user_id]) %>
 
 <div class="ui inverted segment">
   <div class="ui inverted secondary pointing menu">
@@ -15,7 +6,23 @@
       Home
     </a>
     <div class="right menu">
-      <div class="item">
+
+      <% if user.present? %>
+        <div id="username_display" class="item">Welcome! <%= user.name %></div>
+        <div class="item">
+          <%= link_to "Log out", logout_path, class: "ui inverted button", method: "delete" %>
+        </div>
+      <% else %>
+        <div class="item">
+          <%= link_to "Signup", signup_path, class: "ui inverted button" %>
+        </div>
+        <div class="item">
+          <%= link_to "Log in", login_path, class: "ui inverted button" %>
+        </div>
+      <% end %>
+
+
+      <!-- <div class="item">
         User Name
       </div>
       <div class="item">
@@ -26,7 +33,7 @@
       </div>
       <div class="item">
         <a class="ui inverted button">Sign Up</a>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

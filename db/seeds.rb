@@ -12,18 +12,18 @@ puts "Welcome to the seed script :)"
 # User.destroy_all
 
 # Users
-u1 = User.create(email: "test@wdi.com", password_digest: "cake", name: "Test")
-u1 = User.create(email: "peach@wdi.com", password_digest: "cake", name: "Peach")
-u2 = User.create(email: "diego@wdi.com", password_digest: "cake", name: "Diego")
-u3 = User.create(email: "luke@wdi.com", password_digest: "cake", name: "Luke")
-u4 = User.create(email: "xander@wdi.com", password_digest: "cake", name: "Xander")
-u5 = User.create(email: "jin@wdi.com", password_digest: "cake", name: "Jin")
-u6 = User.create(email: "hen@wdi.com", password_digest: "cake", name: "Hen")
-u7 = User.create(email: "petr@wdi.com", password_digest: "cake", name: "Petr")
-u8 = User.create(email: "jared@wdi.com", password_digest: "cake", name: "Jared")
-u9 = User.create(email: "kevin@wdi.com", password_digest: "cake", name: "Kevin")
-u10 = User.create(email: "olivia@wdi.com", password_digest: "cake", name: "Olivia")
-u11 = User.create(email: "hayley@wdi.com", password_digest: "cake", name: "Hayley")
+u1 = User.create(email: "test@wdi.com", password: "cake", name: "Test")
+u1 = User.create(email: "peach@wdi.com", password: "cake", name: "Peach")
+u2 = User.create(email: "diego@wdi.com", password: "cake", name: "Diego")
+u3 = User.create(email: "luke@wdi.com", password: "cake", name: "Luke")
+u4 = User.create(email: "xander@wdi.com", password: "cake", name: "Xander")
+u5 = User.create(email: "jin@wdi.com", password: "cake", name: "Jin")
+u6 = User.create(email: "hen@wdi.com", password: "cake", name: "Hen")
+u7 = User.create(email: "petr@wdi.com", password: "cake", name: "Petr")
+u8 = User.create(email: "jared@wdi.com", password: "cake", name: "Jared")
+u9 = User.create(email: "kevin@wdi.com", password: "cake", name: "Kevin")
+u10 = User.create(email: "olivia@wdi.com", password: "cake", name: "Olivia")
+u11 = User.create(email: "hayley@wdi.com", password: "cake", name: "Hayley")
 
 # Categories
 c1 = Category.create(name: "Perfumes")
