@@ -9,7 +9,7 @@
     </div>
     <div class="ui tab active" data-tab="tab-category1">
       <% @allPerfumes.each do |product| %>
-        <div class="product_wrap">
+        <div class="product_wrap" prod_id= "<%= product.id %>">
           <img src="<%= product.img_src %>" class="product_img">
           <!-- <div style="background-image: url("<%= product.img_src %>");" class="product_img"></div> -->
           <div class="product_min_info">
@@ -21,7 +21,7 @@
     </div>
     <div class="ui tab" data-tab="tab-category2">
       <% @allBooks.each do |product| %>
-        <div class="product_wrap">
+        <div class="product_wrap" prod_id= "<%= product.id %>">
           <img src="<%= product.img_src %>" class="product_img">
           <div class="product_min_info">
             <div class="product_name"><%= product.name %></div>
@@ -32,7 +32,7 @@
     </div>
     <div class="ui tab" data-tab="tab-category3">
       <% @allToys.each do |product| %>
-        <div class="product_wrap">
+        <div class="product_wrap" prod_id= "<%= product.id %>">
           <img src="<%= product.img_src %>" class="product_img">
           <div class="product_min_info">
             <div class="product_name"><%= product.name %></div>
@@ -43,7 +43,7 @@
     </div>
     <div class="ui tab" data-tab="tab-category4">
       <% @allTechnology.each do |product| %>
-        <div class="product_wrap">
+        <div class="product_wrap" prod_id= "<%= product.id %>">
           <img src="<%= product.img_src %>" class="product_img">
           <div class="product_min_info">
             <div class="product_name"><%= product.name %></div>
@@ -58,7 +58,9 @@
 
   <div id="shopping_cart" class="test col-md-4">
     <h2>Your Cart</h2>
-    <div id="shopping_lists"></div>
+    <div id="shopping_lists">
+
+    </div>
   </div>  <!-- Cart Column -->
 
 </div>
