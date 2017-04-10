@@ -29,6 +29,19 @@
   height: 100vh;
 }
 
+.product_wrap, .product_price, .product_name {
+  display: inline-block;
+};
+
+.product_price {
+  /*float: right;*/
+}
+
+.product_wrap {
+  height: 400px;
+  width: 400px;
+  padding: 50px;
+
 div.ui.inverted.segment{
   background: #851b13;
 }
