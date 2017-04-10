@@ -24,6 +24,7 @@ $(document).ready(function() {
 
   var displayListItems = function(listItems, $shoppingList) {
 
+    // this creates each item //
     _.each(listItems, function(listItem) {
       $listItem = $("<div>").addClass("list_item");
 

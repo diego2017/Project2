@@ -15,6 +15,7 @@
 //= require underscore
 //= require semantic.min
 //= require jquery-ui.min
+//= require drag_drop
 //= require transition
 //= require bootstrap.min
 
