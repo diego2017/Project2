@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root "products#app"
   resources :products, only: [:index, :create]
   resources :shopping_lists, only: [:index, :create]
-  resources :list_items, only: [:index, :show, :create]
+  resources :list_items, only: [:index, :show, :create, :update]
   get "/products/:category", to: "products#load"
 end
