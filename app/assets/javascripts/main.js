@@ -48,6 +48,9 @@ $(document).ready(function() {
 
       $shoppingList.append($listItem);
     });
+
+    
+
   };
 
   var getListItems = function($shoppingList, shoppingListID){
