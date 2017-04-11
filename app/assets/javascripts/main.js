@@ -4,9 +4,10 @@ var products = [];
 
 $(document).ready(function() {
 
+  var shoppingListCnt = 0;
   // css stuffs
   var displayHeight = window.innerHeight - 75;
-  $("#shopping_cart").css("height", displayHeight + "px");
+  $("#shopping_lists").css("height", (displayHeight - 45) + "px");
   $("#shop").css("height", displayHeight + "px");
 
 
@@ -32,7 +33,7 @@ $(document).ready(function() {
 
   getProducts();
 
-  var displayListItems = function(listItems, $shoppingList) {
+  var displayListItems = function(listItems, $shoppingList, shoppingList) {
 
     _.each(listItems, function(listItem) {
       $listItem = $("<div>").addClass("list_item");
@@ -49,10 +50,7 @@ $(document).ready(function() {
       $productInfo.append($productName).append($productPrice).append($listItemQuantityInput);
 
       var $productImg = $("<div>").addClass("cart_product_img")
-                               .css("background-image", 'url(' + product.img_src + ')')
-                               .css('background-size', 'contain')
-                               .css('background-repeat', 'no-repeat')
-                               .css('background-position', 'center center');
+                               .css("background-image", 'url(' + product.img_src + ')');
 
       $listItem.append($productImg).append($productInfo).attr("id", listItem.id);
 
@@ -60,19 +58,32 @@ $(document).ready(function() {
 
     }); // each
 
+
   }; // displayListItems
 
 
-  var getListItems = function($shoppingList, shoppingListID){
-
+  var getListItems = function(shoppingList, shoppingLists){
     $.ajax({
-      url: "/list_items/" + shoppingListID,
+      url: "/list_items/" + shoppingList.id,
       method: "GET",
       data: {
         format: "json",
       },
       success: function(data){
-        displayListItems(data, $shoppingList);
+
+        debugger
+        $shoppingList = $("<div>").addClass("shopping_list");
+        $("#shopping_lists").append($shoppingList);
+        $shoppingListName = $("<h3>").addClass("shopping_list_name")
+                                      .html(shoppingList.name);
+        $shoppingList.append($shoppingListName);
+        displayListItems(data, $shoppingList, shoppingList);
+        createEmptyListItem ( shoppingList );
+
+        if(++shoppingListCnt == shoppingLists.length) {
+          $shoppingCartUpdate = $("<button>").html("Save").attr("id", "updateShoppingCart");
+          $("#shopping_lists").append($shoppingCartUpdate);
+        }
       },
       error: function(e) {
         console.log(e.responseText);
@@ -130,24 +141,9 @@ $(document).ready(function() {
 
   var displayShoppingLists = function(shoppingLists) {
     _.each(shoppingLists, function(shoppingList) {
-      $shoppingList = $("<div>").addClass("shopping_list");
-      $shoppingListName = $("<h3>").addClass("shopping_list_name")
-                                    .html(shoppingList.name);
-      $shoppingList.append($shoppingListName);
-
-      getListItems($shoppingList, shoppingList.id);
-
-      //
-
-      $("#shopping_lists").append($shoppingList);
-
-      createEmptyListItem ( shoppingList );
-
+      debugger
+      getListItems(shoppingList, shoppingLists);
     });
-
-    $shoppingCartUpdate = $("<button>").html("Save").attr("id", "updateShoppingCart");
-    $("#shopping_lists").append($shoppingCartUpdate);
-
   };
 
   var getShoppingLists = function(){
@@ -158,7 +154,9 @@ $(document).ready(function() {
       data: {
         format: "json",
       },
-      success: displayShoppingLists,
+      success: function(data) {
+        displayShoppingLists(data);
+      },
       error: function(e) {
         console.log(e);
       }
