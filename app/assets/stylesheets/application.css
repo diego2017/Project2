@@ -26,7 +26,7 @@
 }
 
 #shopping_lists, #shop {
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .empty {
@@ -105,4 +105,9 @@ div.ui.inverted.segment{
 
 .list_item {
   margin: 5px 0;
+}
+
+/*shopping cart save button*/
+#updateShoppingCart {
+  margin: 5px;
 }
