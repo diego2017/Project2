@@ -5,6 +5,7 @@ $(document).ready(function(){
       stack: '#shop div',
       cursor: 'move',
       helper: "clone",
+      scroll: false
       // revert: true,
       // stop: resetProduct
     } );
