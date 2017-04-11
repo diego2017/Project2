@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :create]
   get "/products/:category", to: "products#load"
   resources :shopping_lists, only: [:index, :create]
-  resources :list_items, only: [:index, :show, :create, :update]
+  resources :list_items, only: [:index, :show, :create]
+  patch "/list_items/buld_update", to: "list_items#bulk_update"
 
   # Log in (session related)
   get "login", to: "sessions#new", as: "login"
