@@ -44,6 +44,7 @@
 .product_wrap, .product_price, .product_name {
   display: inline-block;
   margin: 5px;
+  z-index: 100000;
 }
 
 .product_min_info{

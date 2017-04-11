@@ -44,7 +44,8 @@ $(document).ready(function(){
 
 
 
-      }
+    },
+    scroll: false
       // revert: true,
       // stop: resetProduct
     } );
