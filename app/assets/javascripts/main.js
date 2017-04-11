@@ -95,18 +95,12 @@ $(document).ready(function() {
       hoverClass: 'hovered',
       over: function () {
         console.log('hovering over!');
-        // debugger
       },
-
-      //
       drop: function (event, ui) {
-        // debugger
         var movedProduct = ui.draggable.attr('prod_id')
         var listBox = $(this).attr('listid')
         console.log ('You moved product: ' + movedProduct + ', to list: ' + listBox)
-        // debugger
       }
-
     });
 
     $shoppingList.append(emptyItem);
