@@ -82,7 +82,8 @@ $(document).ready(function() {
         createEmptyListItem ( shoppingList );
 
         if(++shoppingListCnt == shoppingLists.length) {
-          $shoppingCartUpdate = $("<button>").html("Save").attr("id", "updateShoppingCart");
+          $shoppingCartUpdate = $("<button>").html("Save")
+                    .addClass("ui button primary").attr("id", "updateShoppingCart");
           $("#shopping_lists").append($shoppingCartUpdate);
         }
       },
@@ -107,6 +108,7 @@ $(document).ready(function() {
         console.log ('You moved product: ' + movedProduct + ', to list: ' + listBox)
       }
     });
+  };
 
   var createNewListItem = function(productID, shoppingListID) {
     $.ajax({
