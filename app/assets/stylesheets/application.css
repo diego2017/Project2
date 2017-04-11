@@ -29,6 +29,16 @@
   height: 100%;
 }
 
+.empty {
+  background-color: rgba(158, 158, 158, 0.31);
+  width: 120px;
+  height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 15px;
+
+}
+
 .product_wrap, .product_price, .product_name {
   display: inline-block;
   margin: 5px;
@@ -65,4 +75,8 @@ div.ui.inverted.segment{
 
 .cart_product_info, .cart_product_img {
   display: inline-block;
+}
+
+.hovered{
+  border: 2px solid green;
 }

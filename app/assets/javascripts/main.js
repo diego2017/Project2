@@ -47,10 +47,13 @@ $(document).ready(function() {
       $listItem.append($productImg).append($productInfo).attr("id", listItem.id);
 
       $shoppingList.append($listItem);
+
+
     });
 
-    
+
   };
+
 
   var getListItems = function($shoppingList, shoppingListID){
     $.ajax({
@@ -68,6 +71,48 @@ $(document).ready(function() {
     });
   };
 
+
+
+    // function handleCardDrop( event, ui ) {
+    // alert ('works')
+    //
+    //   // if ( $(this).hasClass('empty') ){
+    //   //   // $(this).removeClass('empty').addClass( 'taken' );
+    //   //
+    //   var movedProduct = ui.draggable.attr('prod_id')
+    //   //   // var listBox = $(this).attr('id')
+    //   //   alert ('works')
+    //   //   // console.log( 'you just moved product: ' + movedProduct + ' to list box: ' + listBox )
+    //   //
+    //   // }
+    // };
+
+
+  var createEmptyListItem = function ( shoppingList ){
+    // debugger
+    var emptyItem =  $('<div>' + ' Add item here ! ' + '</div>').attr( 'class', 'empty').attr( 'listId', shoppingList.id ).droppable( {
+      accept: '#shop div',
+      hoverClass: 'hovered',
+      over: function () {
+        console.log('hovering over!');
+        // debugger
+      },
+
+      //
+      drop: function (event, ui) {
+        // debugger
+        var movedProduct = ui.draggable.attr('prod_id')
+        var listBox = $(this).attr('listid')
+        console.log ('You moved product: ' + movedProduct + ', to list: ' + listBox)
+        // debugger
+      }
+
+    });
+
+    $shoppingList.append(emptyItem);
+  };
+
+
   var displayShoppingLists = function(shoppingLists) {
     _.each(shoppingLists, function(shoppingList) {
       $shoppingList = $("<div>").addClass("shopping_list");
@@ -77,7 +122,11 @@ $(document).ready(function() {
 
       getListItems($shoppingList, shoppingList.id);
 
+      //
+
       $("#shopping_lists").append($shoppingList);
+
+      createEmptyListItem ( shoppingList );
 
     });
 
@@ -108,7 +157,7 @@ $(document).ready(function() {
       var newQuantity = $(listItem).find("input").val();
       var listItemID = $(listItem).attr("id");
 
-      debugger
+
 
       $.ajax({
         url: "./list_items/" + listItemID,
@@ -120,7 +169,7 @@ $(document).ready(function() {
         }
       });
 
-      debugger
+
     });
   });
 
