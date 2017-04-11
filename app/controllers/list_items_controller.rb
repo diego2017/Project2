@@ -17,4 +17,13 @@ class ListItemsController < ApplicationController
     list_item_id = params[:id]
     binding.pry
   end
+
+  def create
+    product_id = params[:product_id].to_i
+    shopping_list_id = params[:shopping_list_id].to_i
+    new_list_item = ListItem.create(shopping_list_id: shopping_list_id, product_id: product_id, quantity: 1)
+    # 
+    # render json: { list_item: new_list_item }
+
+  end
 end
