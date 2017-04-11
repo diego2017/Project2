@@ -67,7 +67,7 @@ $(document).ready(function() {
       },
       error: function(e) {
         console.log(e.responseText);
-      }
+      },
     });
   };
 
@@ -152,12 +152,10 @@ $(document).ready(function() {
   // Update quantities
   $(document).on("click", "#updateShoppingCart", function() {
     var listItems = $(".list_item");
+    var newQuantities = {};
     _.each(listItems, function(listItem) {
-
       var newQuantity = $(listItem).find("input").val();
       var listItemID = $(listItem).attr("id");
-
-
 
       $.ajax({
         url: "./list_items/" + listItemID,
@@ -169,8 +167,20 @@ $(document).ready(function() {
         }
       });
 
-
+      // newQuantities[listItemID] = parseInt(newQuantity);
     });
+    // console.log('token', $('meta[name="csrf-token"]').attr('content') );
+    var data = {newQuantities}
+    $.ajax({
+      url: "/list_items/buld_update",
+      method: "PATCH",
+      data: data,  //newQuantity,
+      success: displayShoppingLists,
+      error: function(e) {
+        console.log(e);
+      }
+    });
+
   });
 
   // setInterval(function() {
