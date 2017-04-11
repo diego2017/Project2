@@ -22,7 +22,7 @@
 
 
 .test {
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 #shopping_lists, #shop {
@@ -30,10 +30,11 @@
 }
 
 .empty {
-  background-color: rgba(158, 158, 158, 0.31);
+  background-color: rgba(255, 193, 7, 0.34);
   width: 98%;
   height: 70px;
   text-align: center;
+  padding: 26px;
   vertical-align: middle;
   border-radius: 15px;
   margin-right: 30px;

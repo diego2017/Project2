@@ -71,7 +71,7 @@ $(document).ready(function() {
       },
       success: function(data){
 
-        debugger
+
         $shoppingList = $("<div>").addClass("shopping_list");
         $("#shopping_lists").append($shoppingList);
         $shoppingListName = $("<h3>").addClass("shopping_list_name")
@@ -93,7 +93,7 @@ $(document).ready(function() {
 
 
   var createEmptyListItem = function ( shoppingList ){
-    // debugger
+    //
     var emptyItem =  $('<div>' + ' Add item here ! ' + '</div>').attr( 'class', 'empty').attr( 'listId', shoppingList.id ).droppable( {
       accept: '#shop div',
       hoverClass: 'hovered',
@@ -105,7 +105,7 @@ $(document).ready(function() {
         var listBox = $(this).attr('listid')
         console.log ('You moved product: ' + movedProduct + ', to list: ' + listBox)
       }
-    });
+    })};
 
   var createNewListItem = function(productID, shoppingListID) {
     $.ajax({
@@ -158,7 +158,7 @@ $(document).ready(function() {
 
   var displayShoppingLists = function(shoppingLists) {
     _.each(shoppingLists, function(shoppingList) {
-      debugger
+
       getListItems(shoppingList, shoppingLists);
     });
   };
