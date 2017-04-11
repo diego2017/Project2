@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :shopping_lists, only: [:index, :create]
   resources :list_items, only: [:index, :show, :create]
   patch "/list_items/buld_update", to: "list_items#bulk_update"
+  post "/list_items/new", to: "list_items#create"
 
   # Log in (session related)
   get "login", to: "sessions#new", as: "login"

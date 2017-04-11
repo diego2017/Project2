@@ -2,16 +2,19 @@
 
   <div id="shop" class="test col-md-8">
     <div class="ui tabular menu">
-      <div class="item active" data-tab="tab-category1">Perfumes</div>
-      <div class="item" data-tab="tab-category2">Books</div>
-      <div class="item" data-tab="tab-category3">Toys</div>
-      <div class="item" data-tab="tab-category4">Technology</div>
+      <% @categories.each do |category| %>
+        <% if category == @categories.first %>
+          <div class="item active" data-tab="tab-category<%= category.id %>"><%= category.name %></div>
+        <% else %>
+          <div class="item" data-tab="tab-category<%= category.id %>"><%= category.name %></div>
+        <% end %>
+      <% end %>
+
     </div>
     <div class="ui tab active" data-tab="tab-category1">
       <% @allPerfumes.each do |product| %>
         <div class="product_wrap" prod_id= "<%= product.id %>">
           <img src="<%= product.img_src %>" class="product_img">
-          <!-- <div style="background-image: url("<%= product.img_src %>");" class="product_img"></div> -->
           <div class="product_min_info">
             <div class="product_name"><%= product.name %></div>
             <div class="product_price">$<%= '%.02f' % product.price %></div>
@@ -55,12 +58,9 @@
 
   </div>   <!-- //shopping column -->
 
-
   <div id="shopping_cart" class="test col-md-4">
     <h2>Your Cart</h2>
-    <div id="shopping_lists">
-
-    </div>
+    <div id="shopping_lists"></div>
   </div>  <!-- Cart Column -->
 
 </div>

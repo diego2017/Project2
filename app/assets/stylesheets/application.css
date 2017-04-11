@@ -25,17 +25,18 @@
   border: 1px solid red;
 }
 
-#shopping_cart, #shopping {
-  height: 100%;
+#shopping_cart, #shop {
+  overflow: scroll;
 }
 
 .empty {
   background-color: rgba(158, 158, 158, 0.31);
-  width: 120px;
-  height: 50px;
+  width: 98%;
+  height: 100px;
   text-align: center;
   vertical-align: middle;
   border-radius: 15px;
+  margin-right: 30px;
 
 }
 

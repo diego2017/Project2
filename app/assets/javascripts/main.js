@@ -1,12 +1,21 @@
 
+
 var products = [];
 
 $(document).ready(function() {
 
+  // css stuffs
+  var displayHeight = window.innerHeight - 75;
+  $("#shopping_cart").css("height", displayHeight + "px");
+  $("#shop").css("height", displayHeight + "px");
+
+
+  // -----------------------------------
+
   var getProducts = function(){
 
     $.ajax({
-      url: "./products",
+      url: "/products",
       method: "GET",
       data: {
         format: "json",
@@ -17,8 +26,9 @@ $(document).ready(function() {
       error: function(e) {
         console.log(e.responseText);
       }
-    });
-  };
+    }); // ajax
+
+  }; // getProducts
 
   getProducts();
 
@@ -48,16 +58,15 @@ $(document).ready(function() {
 
       $shoppingList.append($listItem);
 
+    }); // each
 
-    });
-
-
-  };
+  }; // displayListItems
 
 
   var getListItems = function($shoppingList, shoppingListID){
+
     $.ajax({
-      url: "./list_items/" + shoppingListID,
+      url: "/list_items/" + shoppingListID,
       method: "GET",
       data: {
         format: "json",
@@ -68,49 +77,55 @@ $(document).ready(function() {
       error: function(e) {
         console.log(e.responseText);
       },
-    });
-  };
+    }); // ajax
+  }; // getListItems
 
+  var createNewListItem = function(productID, shoppingListID) {
+    $.ajax({
+      url: "/list_items/new",
+      method: "POST",
+      data: {
+        product_id: productID,
+        shopping_list_id: shoppingListID
+      },
+      success: function() {
+        $("#shopping_lists").empty();
+        getShoppingLists();
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    }); // ajax
 
-
-    // function handleCardDrop( event, ui ) {
-    // alert ('works')
-    //
-    //   // if ( $(this).hasClass('empty') ){
-    //   //   // $(this).removeClass('empty').addClass( 'taken' );
-    //   //
-    //   var movedProduct = ui.draggable.attr('prod_id')
-    //   //   // var listBox = $(this).attr('id')
-    //   //   alert ('works')
-    //   //   // console.log( 'you just moved product: ' + movedProduct + ' to list box: ' + listBox )
-    //   //
-    //   // }
-    // };
+  }; // createNewListItem (called by drag-drop product from shop)
 
 
   var createEmptyListItem = function ( shoppingList ){
-    // debugger
-    var emptyItem =  $('<div>' + ' Add item here ! ' + '</div>').attr( 'class', 'empty').attr( 'listId', shoppingList.id ).droppable( {
-      accept: '#shop div',
-      hoverClass: 'hovered',
-      over: function () {
-        console.log('hovering over!');
-        // debugger
-      },
+    var emptyItem =  $('<div>' + ' Add item here ! ' + '</div>')
+      .addClass('empty')
+      .attr( 'listId', shoppingList.id )
+      .droppable( {
 
-      //
-      drop: function (event, ui) {
-        // debugger
-        var movedProduct = ui.draggable.attr('prod_id')
-        var listBox = $(this).attr('listid')
-        console.log ('You moved product: ' + movedProduct + ', to list: ' + listBox)
-        // debugger
-      }
+        accept: '#shop div',
 
-    });
+        hoverClass: 'hovered',
+
+        over: function () {
+          console.log('hovering over!');
+        },
+
+        drop: function (event, ui) {
+          var productID = ui.draggable.attr('prod_id')
+          var shoppingListID = $(this).attr('listid')
+          console.log ('You moved product: ' + productID + ', to list: ' + shoppingListID)
+          // function creating AJAX Post request to create new ListItem according to ShoppingList.id
+          createNewListItem(productID, shoppingListID);
+        }
+
+      }); // .dropable
 
     $shoppingList.append(emptyItem);
-  };
+  }; // createEmptyListItem (gray bar in )
 
 
   var displayShoppingLists = function(shoppingLists) {
@@ -136,8 +151,9 @@ $(document).ready(function() {
   };
 
   var getShoppingLists = function(){
+
     $.ajax({
-      url: "./shopping_lists",
+      url: "/shopping_lists",
       method: "GET",
       data: {
         format: "json",
@@ -158,7 +174,7 @@ $(document).ready(function() {
       var listItemID = $(listItem).attr("id");
 
       $.ajax({
-        url: "./list_items/" + listItemID,
+        url: "/list_items/" + listItemID,
         method: "PATCH",
         data: newQuantity,
         success: displayShoppingLists,
