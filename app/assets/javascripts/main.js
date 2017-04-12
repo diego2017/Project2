@@ -117,7 +117,7 @@ $(document).ready(function() {
         $productInfo.append($productName).append($productPrice).append($listItemQuantityInput);
 
         var $productImg = $("<div>").addClass("cart_product_img")
-                                 .css("background-image", 'url(' + product.img_src + ')');
+                                 .css("background-image", 'url(/assets/' + product.full_url + ')');
 
         $listItem.append($productImg).append($productInfo).attr("content_id", listItem.id);
         $shoppingList.append($listItem);
