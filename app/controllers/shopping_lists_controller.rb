@@ -5,7 +5,11 @@ class ShoppingListsController < ApplicationController
       render json: ShoppingList.where(user_id: current_user.id).to_json(
         include: {
           list_items: {
-            :include => :product
+            include: {
+              product: {
+                methods: [:full_img_path]
+              }
+            }
           }
         }
       )
