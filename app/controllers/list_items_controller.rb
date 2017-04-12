@@ -5,12 +5,15 @@ class ListItemsController < ApplicationController
 
   def bulk_update
 
+    user_id = session[:user_id]
     new_quantities = params[:newQuantities]
 
     new_quantities.each do |list_item_id, quantity|
       list_item = ListItem.find(list_item_id.to_i)
       list_item.update_attributes(quantity: quantity.to_i)
     end
+
+    render json: ShoppingList.where(user_id: user_id).to_json(:include => :list_items)
   end
 
   def create

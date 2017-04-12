@@ -9,11 +9,12 @@ Rails.application.routes.draw do
   post "/list_items/new", to: "list_items#create"
 
   # Log in (session related)
-  get "login", to: "sessions#new", as: "login"
-  post "login", to: "sessions#create"
-  delete "logout", to: "sessions#destroy", as: "logout"
+  get "/login", to: "sessions#new", as: "login"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy", as: "logout"
 
   # Create user
-  get "signup", to: "users#new", as: "signup"
+  get "/signup", to: "users#new", as: "signup"
   resources :users, only: [:create]
+  post "/user/new_shopping_list", to: "users#new_shopping_list", as: "new_shopping_list"
 end

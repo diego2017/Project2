@@ -8,6 +8,23 @@ $(document).ready(function() {
   $("#shop").css("height", displayHeight + "px");
   // -----------------------------------
 
+  $(document).on("click", "#new_shopping_list_submit", function(){
+    var newShoppingListName = $("#new_shopping_list_input").val();
+
+    $.ajax({
+      url: "/user/new_shopping_list",
+      method: "POST",
+      data: {newShoppingListName: newShoppingListName},
+      success: function(data){
+        getShoppingLists(data);
+      },
+      error: function(e) {
+        console.log(e.responseText);
+      }
+    });
+
+  }); // create new shopping list
+
   var getProducts = function(){
     $.ajax({
       url: "/products",
@@ -70,7 +87,8 @@ $(document).ready(function() {
   }; // createNewListItem (called by drag-drop product from shop)
 
   var displayData = function(shoppingLists) {
-
+    $("#shopping_lists").empty();
+    
     var $shoppingLists = $("#shopping_lists");
     // display shoppingLists
     _.each(shoppingLists, function(shoppingList) {
@@ -116,19 +134,21 @@ $(document).ready(function() {
     $shoppingLists.append($shoppingCartUpdate);
   };
 
-  var getShoppingLists = function(){
-    $("#shopping_lists").empty();
-    $.ajax({
-      url: "/shopping_lists",
-      method: "GET",
-      data: {
-        format: "json",
-      },
-      success: displayData,
-      error: function(e) {
-        console.log(e);
-      }
-    });
+  var getShoppingLists = function(shoppingLists){
+    if(shoppingLists == undefined) {
+      $.ajax({
+        url: "/shopping_lists",
+        method: "GET",
+        data: {
+          format: "json",
+        },
+        success: displayData,
+        error: function(e) {
+          console.log(e);
+        }
+      });
+    };
+    displayData(shoppingLists);
   };
 
   // Update quantities
