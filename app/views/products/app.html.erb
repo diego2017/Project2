@@ -15,7 +15,8 @@
       <% @allPerfumes.each do |product| %>
         <div class="product_wrap" prod_id= "<%= product.id %>">
           <div class= "prod_img_div">
-            <img src="<%= product.img_src %>" class="product_img">
+            <!-- we always need an image builder when using rails -->
+            <%= image_tag product.img_src, class: "product_img" %>
           </div>
           <div class="product_min_info">
             <div class="product_name">
@@ -31,7 +32,8 @@
       <% @allBooks.each do |product| %>
         <div class="product_wrap" prod_id= "<%= product.id %>">
           <div class= "prod_img_div">
-            <img src="<%= product.img_src %>" class="product_img">
+            <!-- we always need an image builder when using rails -->
+            <%= image_tag product.img_src, class: "product_img" %>
           </div>
           <div class="product_min_info">
             <div class="product_name"><%= product.name %></div>
@@ -44,7 +46,8 @@
       <% @allToys.each do |product| %>
         <div class="product_wrap" prod_id= "<%= product.id %>">
           <div class= "prod_img_div">
-            <img src="<%= product.img_src %>" class="product_img">
+            <!-- we always need an image builder when using rails -->
+            <%= image_tag product.img_src, class: "product_img" %>
           </div>
           <div class="product_min_info">
             <div class="product_name"><%= product.name %></div>
@@ -57,7 +60,8 @@
       <% @allTechnology.each do |product| %>
         <div class="product_wrap" prod_id= "<%= product.id %>">
           <div class= "prod_img_div">
-            <img src="<%= product.img_src %>" class="product_img">
+            <!-- we always need an image builder when using rails -->
+            <%= image_tag product.img_src, class: "product_img" %>
           </div>
           <div class="product_min_info">
             <div class="product_name"><%= product.name %></div>

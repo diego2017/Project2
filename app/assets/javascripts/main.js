@@ -88,7 +88,7 @@ $(document).ready(function() {
 
   var displayData = function(shoppingLists) {
     $("#shopping_lists").empty();
-    
+
     var $shoppingLists = $("#shopping_lists");
     // display shoppingLists
     _.each(shoppingLists, function(shoppingList) {
