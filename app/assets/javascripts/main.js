@@ -1,13 +1,25 @@
 var products = [];
 
 $(document).ready(function() {
-
   // css stuffs
   var displayHeight = window.innerHeight - 75;
   $("#shopping_lists").css("height", (displayHeight - 45) + "px");
   $("#shop").css("height", displayHeight + "px");
   // -----------------------------------
+  // Display watermark when off-focus
+  var watermark = 'Add Shopping List';
+  $('#new_shopping_list_input').blur(function(){
+        if ($(this).val().length == 0){
+            $(this).val(watermark);
+        }
+    });
+  $('#new_shopping_list_input').focus(function(){
+      if ($(this).val() == watermark){
+          $(this).val('');
+      }
+  });
 
+  // eventListener for creating new ShoppingList
   $(document).on("click", "#new_shopping_list_submit", function(){
     var newShoppingListName = $("#new_shopping_list_input").val();
 
@@ -22,27 +34,9 @@ $(document).ready(function() {
         console.log(e.responseText);
       }
     });
-
   }); // create new shopping list
 
-  var getProducts = function(){
-    $.ajax({
-      url: "/products",
-      method: "GET",
-      data: {
-        format: "json",
-      },
-      success: function(data){
-        products = data;
-      },
-      error: function(e) {
-        console.log(e.responseText);
-      }
-    }); // ajax
-  }; // getProducts
-
-  getProducts();
-
+  // Dropbox for creating new ListItem for ShoppingList
   var createEmptyListItem = function ( shoppingList ){
     var emptyItem =  $('<div>' + ' Add item here ! ' + '</div>')
       .addClass('empty')
@@ -65,9 +59,9 @@ $(document).ready(function() {
         }
       }); // .dropable
     return emptyItem;
-  }; // createEmptyListItem (gray bar in )
+  }; // createEmptyListItem
 
-  // when product was dragged-and-dropped on shoppingList
+  // Action when product was dropped on shoppingList (called from createEmptyListItem)
   var createNewListItem = function(productID, shoppingListID) {
     $.ajax({
       url: "/list_items/new",
@@ -87,6 +81,7 @@ $(document).ready(function() {
   }; // createNewListItem (called by drag-drop product from shop)
 
   var displayData = function(shoppingLists) {
+
     $("#shopping_lists").empty();
 
     var $shoppingLists = $("#shopping_lists");
@@ -104,20 +99,20 @@ $(document).ready(function() {
       _.each(shoppingList.list_items, function(listItem) {
 
         $listItem = $("<div>").addClass("list_item");
-
         var product = _.findWhere(products, {id: listItem.product_id});
 
         var $productInfo = $("<div>").addClass("cart_product_info");
         var $productName = $("<div>").addClass("cart_product_name")
-                                     .html(product.name);
+                                     .html(listItem.product.name);
         var $productPrice = $("<div>").addClass("cart_product_price")
-                                  .html("$" + product.price);
+                                  .html("$" + listItem.product.price);
         var $listItemQuantityInput = $("<input>").attr("value", listItem.quantity)
                                                  .attr("id", listItem.id);
         $productInfo.append($productName).append($productPrice).append($listItemQuantityInput);
 
         var $productImg = $("<div>").addClass("cart_product_img")
-                                 .css("background-image", 'url(/assets/' + product.full_url + ')');
+                                //  .css("background-image", 'url(/assets/' + product.full_url + ')');
+                                 .css("background-image", 'url(' + listItem.product.img_src + ')');
 
         $listItem.append($productImg).append($productInfo).attr("content_id", listItem.id);
         $shoppingList.append($listItem);
@@ -142,7 +137,17 @@ $(document).ready(function() {
         data: {
           format: "json",
         },
-        success: displayData,
+        success: function(data) {
+          // Display shop only if not logged in
+          if( data == undefined ) {
+            $("#shopping_lists").hide();
+            $("#cart_menu").hide();
+            $("#shop").removeClass("col-md-8").addClass("col-md-12");
+          } else {
+            $("#shop").removeClass("col-md-12").addClass("col-md-8");
+            displayData(data);
+          }
+        },
         error: function(e) {
           console.log(e);
         }
