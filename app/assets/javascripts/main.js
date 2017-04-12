@@ -93,6 +93,7 @@ $(document).ready(function() {
 
       $shoppingListName = $("<h3>").addClass("shopping_list_name")
                                     .html(shoppingList.name);
+
       $shoppingList.append($shoppingListName);
 
       // display listItems in each shoppingList
@@ -105,7 +106,7 @@ $(document).ready(function() {
         var $productName = $("<div>").addClass("cart_product_name")
                                      .html(listItem.product.name);
         var $productPrice = $("<div>").addClass("cart_product_price")
-                                  .html("$" + listItem.product.price);
+                                  .html("$" + listItem.product.price.toFixed(2));
         var $listItemQuantityInput = $("<input>").attr("value", listItem.quantity)
                                                  .attr("id", listItem.id);
         $productInfo.append($productName).append($productPrice).append($listItemQuantityInput);
@@ -114,6 +115,7 @@ $(document).ready(function() {
 
         var $productImg = $("<div>").addClass("cart_product_img")
               .css("background-image", 'url(' + listItem.product.full_img_path + ')');
+
         $listItem.append($productImg).append($productInfo).attr("content_id", listItem.id);
         $shoppingList.append($listItem);
 

@@ -1,3 +1,27 @@
-<h1>Checkout</h1>
+<div id="checkout_wrap">
+  <h1>Checkout</h1>
 
-<% binding.pry %>
+  <% @products.each do |product| %>
+    <div class="checkout_product_wrapper">
+      <div class="checkout_product_img" style="background-image: url(<%= product[:product].full_img_path %>);"></div>
+      <div class="checkout_inner_wrap">
+        <div class="checkout_product_name">
+          <%= product[:product].name %>
+        </div>
+        <div class="checkout_product_quantity">
+          <span>Quantity: </span>
+          <%= product[:quantity] %>
+        </div>
+        <div class="checkout_product_products_cost">
+          $
+          <%= '%.02f' % product[:products_cost] %>
+        </div>
+      </div>
+    </div>
+    <hr>
+  <% end %>
+  <h2 id="basket_cost">
+    <span>Total: $</span>
+    <span><%= '%.02f' %  @basket_cost %></span>
+  </h2>
+</div>
