@@ -1,9 +1,5 @@
 class ProductsController < ApplicationController
 
-  def index
-    render json: Product.all.to_json(methods: [:full_url])
-  end
-
   def app
     @categories = Category.all
     @allPerfumes = Category.find_by(name: "Perfumes").products
@@ -15,5 +11,5 @@ class ProductsController < ApplicationController
   def create
 
   end
-  
+
 end
