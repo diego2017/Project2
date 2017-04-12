@@ -204,7 +204,7 @@ $(document).ready(function() {
       // newQuantities[listItemID] = parseInt(newQuantity);
     });
     // console.log('token', $('meta[name="csrf-token"]').attr('content') );
-    var data = {newQuantities}
+    var data = newQuantities
     $.ajax({
       url: "/list_items/buld_update",
       method: "PATCH",
