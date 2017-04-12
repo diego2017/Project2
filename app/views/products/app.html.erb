@@ -75,7 +75,6 @@
 
   <div id="shopping_cart" class="col-md-4">
     <!-- <h2>Your Cart</h2> -->
-<<<<<<< HEAD
     
     <div class="ui compact menu">
       <!-- <div class="item">
@@ -90,33 +89,12 @@
 
       <!-- <div class="right menu"> -->
 
-        <a class="item" id="check_out">
+        <a class="item" id="check_out" href="/checkout">
           Check out
         </a>
       <!-- </div> -->
     </div>
     <!-- // -->
-=======
-    <%# if defined? current_user %>
-      <%# binding.pry %>
-      <div class="ui inverted menu grey" id="cart_menu">
-        <div class="item">
-          Your Cart
-        </div>
-        <div class="right menu">
-
-          <input type="text" class="ui input" id="new_shopping_list_input" value="Add Shopping List">
-          <a class="item" id="new_shopping_list_submit">
-            Add List
-          </a>
-
-          <a class="item" id="check_out" href="/checkout">
-            Check out
-          </a>
-        </div>
-      </div>
->>>>>>> 58606ac54e34fb8ba8111597dbf860ede379ec6d
-
       <div id="shopping_lists"></div>
     <%# end %>
 
