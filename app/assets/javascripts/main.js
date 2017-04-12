@@ -31,7 +31,6 @@ $(document).ready(function() {
       .addClass('empty')
       .attr( 'listId', shoppingList.id )
       .droppable( {
-
         accept: '#shop div',
 
         hoverClass: 'hovered',
@@ -47,13 +46,11 @@ $(document).ready(function() {
           // function creating AJAX Post request to create new ListItem according to ShoppingList.id
           createNewListItem(productID, shoppingListID);
         }
-
       }); // .dropable
-
-
     return emptyItem;
   }; // createEmptyListItem (gray bar in )
 
+  // when product was dragged-and-dropped on shoppingList
   var createNewListItem = function(productID, shoppingListID) {
     $.ajax({
       url: "/list_items/new",
@@ -70,16 +67,12 @@ $(document).ready(function() {
         console.log(e);
       }
     }); // ajax
-
   }; // createNewListItem (called by drag-drop product from shop)
-
-
-
-
 
   var displayData = function(shoppingLists) {
 
     var $shoppingLists = $("#shopping_lists");
+    // display shoppingLists
     _.each(shoppingLists, function(shoppingList) {
       var $shoppingList = $("<div>").addClass("shopping_list")
                                     .attr("content_id", shoppingList.id);
@@ -88,7 +81,8 @@ $(document).ready(function() {
       $shoppingListName = $("<h3>").addClass("shopping_list_name")
                                     .html(shoppingList.name);
       $shoppingList.append($shoppingListName);
-      debugger
+
+      // display listItems in each shoppingList
       _.each(shoppingList.list_items, function(listItem) {
 
         $listItem = $("<div>").addClass("list_item");
@@ -112,19 +106,18 @@ $(document).ready(function() {
 
       }); // each
 
+      // drop-box for drag-and-drop at the end of each shoppingList
       $shoppingList.append( createEmptyListItem(shoppingList) );
     }); // each
 
+    // "Save" button for updating listItems quantities
     $shoppingCartUpdate = $("<button>").html("Save")
               .addClass("ui button primary").attr("id", "updateShoppingCart");
     $shoppingLists.append($shoppingCartUpdate);
-
-    // getListItems(shoppingLists);
-
   };
 
   var getShoppingLists = function(){
-
+    $("#shopping_lists").empty();
     $.ajax({
       url: "/shopping_lists",
       method: "GET",
@@ -140,31 +133,21 @@ $(document).ready(function() {
 
   // Update quantities
   $(document).on("click", "#updateShoppingCart", function() {
+
     var listItems = $(".list_item");
     var newQuantities = {};
-    // _.each(listItems, function(listItem) {
-    //   var newQuantity = $(listItem).find("input").val();
-    //   var listItemID = $(listItem).attr("id");
-    //
-    //   $.ajax({
-    //     url: "/list_items/" + listItemID,
-    //     method: "PATCH",
-    //     data: newQuantity,
-    //     success: displayShoppingLists,
-    //     error: function(e) {
-    //       console.log(e);
-    //     }
-    //   });
-    //
-    //   // newQuantities[listItemID] = parseInt(newQuantity);
-    // });
-    // console.log('token', $('meta[name="csrf-token"]').attr('content') );
-    var data = newQuantities;
+
+    _.each(listItems, function(listItem) {
+      var newQuantity = parseInt($(listItem).find("input").val());
+      var listItemID = parseInt($(listItem).attr("content_id"));
+      newQuantities[listItemID] = newQuantity;
+    });
+
     $.ajax({
       url: "/list_items/buld_update",
       method: "PATCH",
-      data: data,  //newQuantity,
-      success: displayShoppingLists,
+      data: {newQuantities: newQuantities},
+      success: getShoppingLists,
       error: function(e) {
         console.log(e);
       }
