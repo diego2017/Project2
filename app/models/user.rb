@@ -4,4 +4,5 @@ class User < ApplicationRecord
   validates_format_of  :email, :with => /.+@.+\..+/i
   has_many :shopping_lists
   has_many :list_items, through: :shopping_lists
+  has_many :products, through: :list_items
 end
