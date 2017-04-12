@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get "/signup", to: "users#new", as: "signup"
   resources :users, only: [:create]
   post "/user/new_shopping_list", to: "users#new_shopping_list", as: "new_shopping_list"
+  get "/checkout", to: "users#checkout", as: "checkout"
 end
