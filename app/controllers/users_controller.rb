@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   # Create new ShoppingList for current user
   def new_shopping_list
 
-  binding.pry
+
 
     new_shopping_list_name = params[:newShoppingListName]
     new_shopping_list = ShoppingList.create(name: new_shopping_list_name, user_id: current_user.id)
@@ -38,4 +38,12 @@ class UsersController < ApplicationController
   def checkout
     @current_user = current_user
   end
+
+  private
+
+  def clean_params
+    params.require(:user).permit(:name, :email, :password)
+  end
+
+
 end

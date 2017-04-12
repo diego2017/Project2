@@ -1,13 +1,32 @@
-<%= form_tag login_path, method: "post" do %>
-  <p>
-    <label>Name/Email</label>
-    <input type="text" name="input"/>
-  </p>
-  <p>
-    <label>Password</label>
-    <input type="password" name="password"/>
-  </p>
-  <p>
-    <input type="submit" value="Signin"/>
-  </p>
-<% end %>
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+  <h2 class="ui blue image header">
+    <div class="content">
+      Provide these details to login !
+    </div>
+  </h2>
+
+  <%= form_tag login_path, method: "post" do %>
+    <div class="ui input focus ">
+      <div>
+        <p>
+          <label>Name/Email</label>
+          <input type="text" name="input"/>
+        </p>
+      </div>
+      <div>
+        <p>
+          <label>   Password</label>
+          <input type="password" name="password"/>
+        </p>
+      </div>
+      <div>
+        <p>
+          <input type="submit" value="Signin"/>
+        </p>
+      </div>
+    </div>
+  <% end %>
+
+  </div>
+</div>
