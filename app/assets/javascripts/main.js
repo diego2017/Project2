@@ -94,22 +94,6 @@ $(document).ready(function() {
   }; // getListItems
 
 
-  var createEmptyListItem = function ( shoppingList ){
-    // debugger
-    var emptyItem =  $('<div>' + ' Add item here ! ' + '</div>').attr( 'class', 'empty').attr( 'listId', shoppingList.id ).droppable( {
-      accept: '#shop div',
-      hoverClass: 'hovered',
-      over: function () {
-        console.log('hovering over!');
-      },
-      drop: function (event, ui) {
-        var movedProduct = ui.draggable.attr('prod_id')
-        var listBox = $(this).attr('listid')
-        console.log ('You moved product: ' + movedProduct + ', to list: ' + listBox)
-      }
-    });
-  };
-
   var createNewListItem = function(productID, shoppingListID) {
     $.ajax({
       url: "/list_items/new",
@@ -204,7 +188,7 @@ $(document).ready(function() {
       // newQuantities[listItemID] = parseInt(newQuantity);
     });
     // console.log('token', $('meta[name="csrf-token"]').attr('content') );
-    var data = newQuantities
+    var data = newQuantities;
     $.ajax({
       url: "/list_items/buld_update",
       method: "PATCH",
