@@ -71,28 +71,28 @@
 
   <div id="shopping_cart" class="col-md-4">
     <!-- <h2>Your Cart</h2> -->
-    <div class="ui inverted menu grey">
-      <div class="item">
-        Your Cart
+    <%# if defined? current_user %>
+      <%# binding.pry %>
+      <div class="ui inverted menu grey" id="cart_menu">
+        <div class="item">
+          Your Cart
+        </div>
+        <div class="right menu">
+
+          <input type="text" class="ui input" id="new_shopping_list_input" value="Add Shopping List">
+          <a class="item" id="new_shopping_list_submit">
+            Add List
+          </a>
+
+          <a class="item" id="check_out">
+            Check out
+          </a>
+        </div>
       </div>
-      <div class="right menu">
 
-        <!-- <button class="ui button" id="add_shopping_list">
-          <%# link_to "Add List", new_shopping_list_path, class: "item"%>
-        </button> -->
-        <input type="text" class="ui input" id="new_shopping_list_input" value="New Shopping List Name">
-        <a class="item" id="new_shopping_list_submit">
-          Add List
-        </a>
+      <div id="shopping_lists"></div>
+    <%# end %>
 
-        <a class="item" id="check_out">
-          Check out
-        </a>
-      </div>
-    </div>
-    <!-- // -->
-
-    <div id="shopping_lists"></div>
   </div>  <!-- Cart Column -->
 
 </div>

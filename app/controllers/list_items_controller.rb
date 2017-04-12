@@ -1,11 +1,10 @@
 class ListItemsController < ApplicationController
   def index
-    render json: User.find_by_id(session[:user_id]).list_items
+    render json: User.find_by_id(current_user.id).list_items
   end
 
   def bulk_update
 
-    user_id = session[:user_id]
     new_quantities = params[:newQuantities]
 
     new_quantities.each do |list_item_id, quantity|
@@ -13,7 +12,14 @@ class ListItemsController < ApplicationController
       list_item.update_attributes(quantity: quantity.to_i)
     end
 
-    render json: ShoppingList.where(user_id: user_id).to_json(:include => :list_items)
+    render json: ShoppingList.where(user_id: current_user.id).to_json(
+      include: {
+        list_items: {
+          :include => :product
+        }
+      }
+    )
+    
   end
 
   def create
