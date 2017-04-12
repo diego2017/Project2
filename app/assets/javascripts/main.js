@@ -34,87 +34,6 @@ $(document).ready(function() {
 
   getProducts();
 
-  var displayListItems = function(listItems, $shoppingList, shoppingList) {
-
-    _.each(listItems, function(listItem) {
-      $listItem = $("<div>").addClass("list_item");
-
-      var product = _.findWhere(products, {id: listItem.product_id});
-
-      var $productInfo = $("<div>").addClass("cart_product_info");
-      var $productName = $("<div>").addClass("cart_product_name")
-                                   .html(product.name);
-      var $productPrice = $("<div>").addClass("cart_product_price")
-                                .html("$" + product.price);
-      var $listItemQuantityInput = $("<input>").attr("value", listItem.quantity)
-                                               .attr("id", listItem.id);
-      $productInfo.append($productName).append($productPrice).append($listItemQuantityInput);
-
-      var $productImg = $("<div>").addClass("cart_product_img")
-                               .css("background-image", 'url(' + product.img_src + ')');
-
-      $listItem.append($productImg).append($productInfo).attr("id", listItem.id);
-
-      $shoppingList.append($listItem);
-
-    }); // each
-
-
-  }; // displayListItems
-
-
-  var getListItems = function(shoppingList, shoppingLists){
-    $.ajax({
-      url: "/list_items/" + shoppingList.id,
-      method: "GET",
-      data: {
-        format: "json",
-      },
-      success: function(data){
-
-        debugger
-        $shoppingList = $("<div>").addClass("shopping_list");
-        $("#shopping_lists").append($shoppingList);
-        $shoppingListName = $("<h3>").addClass("shopping_list_name")
-                                      .html(shoppingList.name);
-        $shoppingList.append($shoppingListName);
-        displayListItems(data, $shoppingList, shoppingList);
-        createEmptyListItem ( shoppingList );
-
-        if(++shoppingListCnt == shoppingLists.length) {
-          $shoppingCartUpdate = $("<button>").html("Save")
-                    .addClass("ui button primary").attr("id", "updateShoppingCart");
-          $("#shopping_lists").append($shoppingCartUpdate);
-        }
-      },
-      error: function(e) {
-        console.log(e.responseText);
-      },
-    }); // ajax
-  }; // getListItems
-
-
-  var createNewListItem = function(productID, shoppingListID) {
-    $.ajax({
-      url: "/list_items/new",
-      method: "POST",
-      data: {
-        product_id: productID,
-        shopping_list_id: shoppingListID
-      },
-      success: function() {
-        $("#shopping_lists").empty();
-        getShoppingLists();
-      },
-      error: function(e) {
-        console.log(e);
-      }
-    }); // ajax
-
-  }; // createNewListItem (called by drag-drop product from shop)
-
-
-
   var createEmptyListItem = function ( shoppingList ){
     var emptyItem =  $('<div>' + ' Add item here ! ' + '</div>')
       .addClass('empty')
@@ -139,15 +58,77 @@ $(document).ready(function() {
 
       }); // .dropable
 
-    $shoppingList.append(emptyItem);
+
+    return emptyItem;
   }; // createEmptyListItem (gray bar in )
 
+  var createNewListItem = function(productID, shoppingListID) {
+    $.ajax({
+      url: "/list_items/new",
+      method: "POST",
+      data: {
+        product_id: productID,
+        shopping_list_id: shoppingListID
+      },
+      success: function() {
+        $("#shopping_lists").empty();
+        getShoppingLists();
+      },
+      error: function(e) {
+        console.log(e);
+      }
+    }); // ajax
 
-  var displayShoppingLists = function(shoppingLists) {
+  }; // createNewListItem (called by drag-drop product from shop)
+
+
+
+
+
+  var displayData = function(shoppingLists) {
+
+    var $shoppingLists = $("#shopping_lists");
     _.each(shoppingLists, function(shoppingList) {
-      debugger;
-      getListItems(shoppingList, shoppingLists);
-    });
+      var $shoppingList = $("<div>").addClass("shopping_list")
+                                    .attr("content_id", shoppingList.id);
+      $shoppingLists.append($shoppingList);
+
+      $shoppingListName = $("<h3>").addClass("shopping_list_name")
+                                    .html(shoppingList.name);
+      $shoppingList.append($shoppingListName);
+      debugger
+      _.each(shoppingList.list_items, function(listItem) {
+
+        $listItem = $("<div>").addClass("list_item");
+
+        var product = _.findWhere(products, {id: listItem.product_id});
+
+        var $productInfo = $("<div>").addClass("cart_product_info");
+        var $productName = $("<div>").addClass("cart_product_name")
+                                     .html(product.name);
+        var $productPrice = $("<div>").addClass("cart_product_price")
+                                  .html("$" + product.price);
+        var $listItemQuantityInput = $("<input>").attr("value", listItem.quantity)
+                                                 .attr("id", listItem.id);
+        $productInfo.append($productName).append($productPrice).append($listItemQuantityInput);
+
+        var $productImg = $("<div>").addClass("cart_product_img")
+                                 .css("background-image", 'url(' + product.img_src + ')');
+
+        $listItem.append($productImg).append($productInfo).attr("content_id", listItem.id);
+        $shoppingList.append($listItem);
+
+      }); // each
+
+      $shoppingList.append( createEmptyListItem(shoppingList) );
+    }); // each
+
+    $shoppingCartUpdate = $("<button>").html("Save")
+              .addClass("ui button primary").attr("id", "updateShoppingCart");
+    $shoppingLists.append($shoppingCartUpdate);
+
+    // getListItems(shoppingLists);
+
   };
 
   var getShoppingLists = function(){
@@ -158,9 +139,7 @@ $(document).ready(function() {
       data: {
         format: "json",
       },
-      success: function(data) {
-        displayShoppingLists(data);
-      },
+      success: displayData,
       error: function(e) {
         console.log(e);
       }
@@ -171,22 +150,22 @@ $(document).ready(function() {
   $(document).on("click", "#updateShoppingCart", function() {
     var listItems = $(".list_item");
     var newQuantities = {};
-    _.each(listItems, function(listItem) {
-      var newQuantity = $(listItem).find("input").val();
-      var listItemID = $(listItem).attr("id");
-
-      $.ajax({
-        url: "/list_items/" + listItemID,
-        method: "PATCH",
-        data: newQuantity,
-        success: displayShoppingLists,
-        error: function(e) {
-          console.log(e);
-        }
-      });
-
-      // newQuantities[listItemID] = parseInt(newQuantity);
-    });
+    // _.each(listItems, function(listItem) {
+    //   var newQuantity = $(listItem).find("input").val();
+    //   var listItemID = $(listItem).attr("id");
+    //
+    //   $.ajax({
+    //     url: "/list_items/" + listItemID,
+    //     method: "PATCH",
+    //     data: newQuantity,
+    //     success: displayShoppingLists,
+    //     error: function(e) {
+    //       console.log(e);
+    //     }
+    //   });
+    //
+    //   // newQuantities[listItemID] = parseInt(newQuantity);
+    // });
     // console.log('token', $('meta[name="csrf-token"]').attr('content') );
     var data = newQuantities;
     $.ajax({
@@ -201,8 +180,6 @@ $(document).ready(function() {
 
   });
 
-  // setInterval(function() {
-    getShoppingLists();
-  // }, 2000);
+  getShoppingLists();
 
 }); // document.ready
