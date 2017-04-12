@@ -1,21 +1,14 @@
-
-
 var products = [];
 
 $(document).ready(function() {
 
-  var shoppingListCnt = 0;
   // css stuffs
   var displayHeight = window.innerHeight - 75;
   $("#shopping_lists").css("height", (displayHeight - 45) + "px");
   $("#shop").css("height", displayHeight + "px");
-  // $("#shop").css("width", (window.innerWidth*0.66) + "px");
-
-
   // -----------------------------------
 
   var getProducts = function(){
-
     $.ajax({
       url: "/products",
       method: "GET",
@@ -29,7 +22,6 @@ $(document).ready(function() {
         console.log(e.responseText);
       }
     }); // ajax
-
   }; // getProducts
 
   getProducts();
