@@ -89,7 +89,7 @@ div.ui.inverted.segment{
     display: block;
 }
 
-.cart_product_img, .checkout_product_img {
+.cart_product_img {
   min-width:  58.75px;
   height: 58.75px;
   background-size: contain;
@@ -97,8 +97,16 @@ div.ui.inverted.segment{
   background-position: center center;
 }
 
-.cart_product_info, .cart_product_img, .checkout_product_img {
+.cart_product_info, .cart_product_img, .checkout_product_img, .checkout_inner_wrap {
   display: inline-block;
+}
+
+.checkout_product_img {
+  width:  58.75px;
+  height: 58.75px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .hovered{

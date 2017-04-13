@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "products#app"
-  resources :products, only: [:create]
+  resources :categories, only: [:new, :create]
+  resources :products, only: [:new, :create]
   get "/products/:category", to: "products#load"
   resources :shopping_lists, only: [:index, :create]
   resources :list_items, only: [:index, :create]
@@ -18,4 +19,6 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   post "/user/new_shopping_list", to: "users#new_shopping_list", as: "new_shopping_list"
   get "/checkout", to: "users#checkout", as: "checkout"
+
+  resources :charges
 end
