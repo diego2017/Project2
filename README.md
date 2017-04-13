@@ -12,10 +12,6 @@ An online version of the game can be accessed using this  [Link  :link:](https:/
 - Users are able to login to the app, create a list for every person they need to buy a present for, or a different list for each occasion.
 - Once the lists are created, users can do their shopping from the left section of the page and simply drag a product and drop it inside a list.
 
--categories creation
-- new product
-- payment
-
 
 ### Description of the app:
 * The home page is divided in 2 main sections: the shop section and the shopping cart section.
@@ -25,18 +21,19 @@ An online version of the game can be accessed using this  [Link  :link:](https:/
   - A menu above the lists can be used to create lists and go to checkout. To create a new list, type the name of the new list in the input field on the right side corner of the menu, and click on Add list.
   - Lists include the products that have been selected by users. For each product, the image, name, price and quantity are shown.
 
-* To add products to a list: click on the product and drag it to the yellow box that says "Add item here!", the box will change to green to indicate that you can stop clicking.
+* To add products to a list: click on the product and drag it to the yellow box that says "Add item here!", the box will change to green to indicate that you can drop your item into designated shopping list.
 
-* There is a navigation menu at the top of the page, it can be used to login, logout and signup.
-  - There are separate pages for Login, Signup.
+* There is a navigation menu at the top of the page, it can be used to log in, log out and sign up.
+  - There are separate pages for Log in, Sign up.
 
 * There is a page for creating a new product, and also one to create a new category.
+  - Currently, there are no direct links to those pages, because the users, currently, doesn't have user type implemented.
 
-* After clicking 'Checkout' from the shopping basket, the user is redirected to the shopping checkout section. In here, the user can see its products and if they agree, proceed to payment.
+* After clicking 'Checkout' from the shopping basket, the user is redirected to the shopping checkout section. In here, the user can see their products and if they agree, proceed to payment.
 
 * Payment is done using Stripe.
 
 
 ## Comments on the project and its development:
-* The application is currently working with basic functionalities. Users can signup, signin and signout. Users can see products, add them to their lists and proceed to checkout.
+* The application is currently working with basic functionalities. Users can sign up, log in and log out. Users can see products, add them to their lists and proceed to checkout.
 * Working in a team was a different experience to us. We could achieve more because we split tasks but also we got involved in less processes.
