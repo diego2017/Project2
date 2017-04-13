@@ -6,18 +6,6 @@ $(document).ready(function() {
   $("#shopping_lists").css("height", (displayHeight - 45) + "px");
   $("#shop").css("height", displayHeight + "px");
   // -----------------------------------
-  // Display watermark when off-focus
-  var watermark = 'Add Shopping List';
-  $('#new_shopping_list_input').blur(function(){
-        if ($(this).val().length == 0){
-            $(this).val(watermark);
-        }
-    });
-  $('#new_shopping_list_input').focus(function(){
-      if ($(this).val() == watermark){
-          $(this).val('');
-      }
-  });
 
   // eventListener for creating new ShoppingList
   $(document).on("click", "#new_shopping_list_submit", function(){

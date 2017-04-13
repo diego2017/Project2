@@ -9,79 +9,43 @@
           <div class="item" data-tab="tab-category<%= category.id %>"><%= category.name %></div>
         <% end %>
       <% end %>
-
     </div>
-    <div class="ui tab active" data-tab="tab-category1">
-      <% @allPerfumes.each do |product| %>
-        <div class="product_wrap" prod_id= "<%= product.id %>">
-          <div class= "prod_img_div">
-            <!-- we always need an image builder when using rails -->
-            <%= image_tag product.img_src, class: "product_img" %>
-          </div>
-          <div class="product_min_info">
-            <div class="product_name">
-              <%= product.name %>
-              <div class="product_price">$<%= '%.02f' % product.price %></div>
+
+    <% category_counter = 1%>
+    <% @all_products_in_shop.each do |all_products_in_category| %>
+      <% if category_counter == 1 %>
+      <div class="ui tab active" data-tab="tab-category<%= category_counter %>">
+      <% else %>
+        <div class="ui tab" data-tab="tab-category<%= category_counter %>">
+      <% end %>
+        <% all_products_in_category.each do |product| %>
+          <div class="product_wrap" prod_id= "<%= product.id %>">
+            <div class= "prod_img_div">
+              <%= image_tag product.img_src, class: "product_img" %>
+            </div>
+            <div class="product_min_info">
+              <div class="product_name">
+                <%= product.name %>
+                <div class="product_price">$<%= '%.02f' % product.price %></div>
+              </div>
             </div>
           </div>
-        </div>
-
-      <% end %>  <!-- close product div -->
-    </div>
-    <div class="ui tab" data-tab="tab-category2">
-      <% @allBooks.each do |product| %>
-        <div class="product_wrap" prod_id= "<%= product.id %>">
-          <div class= "prod_img_div">
-            <!-- we always need an image builder when using rails -->
-            <%= image_tag product.img_src, class: "product_img" %>
-          </div>
-          <div class="product_min_info">
-            <div class="product_name"><%= product.name %></div>
-            <div class="product_price">$<%= '%.02f' % product.price %></div>
-          </div>
-        </div>
-      <% end %>  <!-- close product div -->
-    </div>
-    <div class="ui tab" data-tab="tab-category3">
-      <% @allToys.each do |product| %>
-        <div class="product_wrap" prod_id= "<%= product.id %>">
-          <div class= "prod_img_div">
-            <!-- we always need an image builder when using rails -->
-            <%= image_tag product.img_src, class: "product_img" %>
-          </div>
-          <div class="product_min_info">
-            <div class="product_name"><%= product.name %></div>
-            <div class="product_price">$<%= '%.02f' % product.price %></div>
-          </div>
-        </div>
-      <% end %>  <!-- close product div -->
-    </div>
-    <div class="ui tab" data-tab="tab-category4">
-      <% @allTechnology.each do |product| %>
-        <div class="product_wrap" prod_id= "<%= product.id %>">
-          <div class= "prod_img_div">
-            <!-- we always need an image builder when using rails -->
-            <%= image_tag product.img_src, class: "product_img" %>
-          </div>
-          <div class="product_min_info">
-            <div class="product_name"><%= product.name %></div>
-            <div class="product_price">$<%= '%.02f' % product.price %></div>
-          </div>
-        </div>
-      <% end %>  <!-- close product div -->
-    </div>
+        <% end %>
+      </div>
+      <% category_counter += 1%>
+    <% end %>
 
   </div>   <!-- //shopping column -->
 
   <div id="shopping_cart" class="col-md-4">
     <!-- <h2>Your Cart</h2> -->
-    
+
     <div class="ui compact menu">
       <!-- <div class="item">
         Your Cart
       </div> -->
        <div class="ui icon input">
-        <input type="text" class="ui input" id="new_shopping_list_input" value="New List">
+        <input type="text" class="ui input" id="new_shopping_list_input" placeholder="New List">
         <a class="item" id="new_shopping_list_submit">
           Add List
         </a>
