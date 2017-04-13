@@ -51,4 +51,12 @@ class UsersController < ApplicationController
       @products.push(product)
     end
   end
+
+  private
+
+  def clean_params
+    params.require(:user).permit(:name, :email, :password)
+  end
+
+
 end
