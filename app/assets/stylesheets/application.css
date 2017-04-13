@@ -49,6 +49,11 @@
 #title{
   font-size: 1.5em;
 }
+
+.product_name {
+  width: 70%
+}
+
 .product_wrap, .product_price, .product_name {
   display: inline-block;
   margin: 5px;
