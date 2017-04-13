@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
   end
 
   def app
+    @current_user = current_user
     @categories = Category.all
     @all_products_in_shop = []
 
